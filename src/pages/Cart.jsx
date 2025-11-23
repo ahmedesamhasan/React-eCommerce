@@ -1,22 +1,17 @@
-import React from 'react';
-// 1. استيراد أدوات Redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart, updateQuantity } from '../store/cartSlice';
 
 function Cart() {
-  // 2. قراءة المنتجات الحقيقية من المخزن بدل البيانات الوهمية
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-  // 3. تفعيل الدليفري عشان نبعت أوامر الحذف والتعديل
   const dispatch = useDispatch();
 
-  // حساب السعر الإجمالي
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   if (cartItems.length === 0) {
     return (
       <div className='text-center py-5'>
-        <h3>Your Cart is Empty 🛒</h3>
+        <h3>Your Cart is Empty </h3>
         <p className='text-muted'>Go add some products!</p>
       </div>
     );
@@ -44,7 +39,6 @@ function Cart() {
                     <div className='d-flex justify-content-between align-items-center mb-2'>
                       <h5 className='card-title mb-0'>{item.title}</h5>
 
-                      {/* زرار الحذف: بيبعت أمر للمخزن */}
                       <button
                         className='btn btn-outline-danger btn-sm'
                         onClick={() => dispatch(removeFromCart(item.id))}
@@ -54,7 +48,6 @@ function Cart() {
                     </div>
                     <p className='card-text text-primary fw-bold'>${item.price}</p>
 
-                    {/* أزرار الكمية: بتبعت أمر للمخزن */}
                     <div className='d-flex align-items-center gap-2'>
                       <button
                         className='btn btn-light btn-sm border'
@@ -79,7 +72,6 @@ function Cart() {
           ))}
         </div>
 
-        {/* ملخص الطلب */}
         <div className='col-md-4'>
           <div className='card shadow-sm border-0 p-3'>
             <h4 className='card-title mb-4'>Order Summary</h4>

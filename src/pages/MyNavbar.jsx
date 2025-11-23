@@ -1,15 +1,15 @@
 import { Link, NavLink } from 'react-router-dom';
-// 1. استيراد الحاجات بتاعة Redux (للسلة)
+
 import { useSelector } from 'react-redux';
-// 2. استيراد الحاجات بتاعة Context (للغة)
+
 import { useContext } from 'react';
 import { LangContext } from '../pages/LangContext';
 
 function MyNavbar() {
-  // مخزن السلة
+
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-  // مخزن اللغة
+
   const { language, toggleLanguage } = useContext(LangContext);
 
   return (
@@ -50,7 +50,7 @@ function MyNavbar() {
                 Contact Us
               </NavLink>
             </li>
-            {/* زرار السلة (Redux) */}
+
             <li className='nav-item'>
               <NavLink className='nav-link position-relative' to='/cart'>
                 Cart 🛒
@@ -62,7 +62,7 @@ function MyNavbar() {
               </NavLink>
             </li>
 
-            {/* زرار اللغة (Context) - ده الجديد 👇 */}
+
             <li className='nav-item ms-2'>
               <button className='btn btn-outline-light btn-sm fw-bold' onClick={toggleLanguage}>
                 {language === 'en' ? '🇺🇸 EN' : '🇪🇬 AR'}

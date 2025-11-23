@@ -1,23 +1,20 @@
 import React from 'react';
-// 1. استيراد المكتبات
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 function ContactUs() {
-  // 2. تعريف شروط الفحص (Validation Schema) باستخدام Yup
-  // بص السهولة: بنكتب الشروط كأننا بنحكي
   const validationSchema = Yup.object({
     firstName: Yup.string().required('First Name is required'),
     lastName: Yup.string().required('Last Name is required'),
     email: Yup.string().email('Invalid email format').required('Email is required'),
-    phone: Yup.string(), // اختياري فمش هنكتب required
+    phone: Yup.string(),
     message: Yup.string()
       .min(10, 'Message must be at least 10 characters')
       .max(500, 'Message must not exceed 500 characters')
       .required('Message is required'),
   });
 
-  // 3. تشغيل Formik
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -26,12 +23,11 @@ function ContactUs() {
       phone: '',
       message: '',
     },
-    validationSchema, // ربطنا الشروط بالفورم
+    validationSchema,
     onSubmit: (values, { resetForm }) => {
-      // الكود ده هيتنفذ بس لو مفيش أخطاء
       console.log('Form Data:', values);
       alert('Success! We will get back to you soon. 🚀');
-      resetForm(); // فضي الفورم بعد الإرسال
+      resetForm();
     },
   });
 
@@ -41,7 +37,6 @@ function ContactUs() {
         <h2 className='text-center mb-4'>Send Us a Message 📩</h2>
 
         <form onSubmit={formik.handleSubmit}>
-          {/* الصف الأول: الاسم الأول والأخير */}
           <div className='row mb-3'>
             <div className='col-md-6'>
               <label className='form-label'>First Name</label>
@@ -51,10 +46,9 @@ function ContactUs() {
                 className={`form-control ${
                   formik.touched.firstName && formik.errors.firstName ? 'is-invalid' : ''
                 }`}
-                // السطر السحري اللي بيربط الحقل بـ Formik
                 {...formik.getFieldProps('firstName')}
               />
-              {/* عرض الخطأ */}
+
               {formik.touched.firstName && formik.errors.firstName && (
                 <div className='text-danger small'>{formik.errors.firstName}</div>
               )}
@@ -76,7 +70,6 @@ function ContactUs() {
             </div>
           </div>
 
-          {/* الصف الثاني: الإيميل والموبايل */}
           <div className='row mb-3'>
             <div className='col-md-6'>
               <label className='form-label'>Email Address</label>
@@ -106,7 +99,6 @@ function ContactUs() {
             </div>
           </div>
 
-          {/* الرسالة */}
           <div className='mb-3'>
             <label className='form-label'>Message</label>
             <textarea
