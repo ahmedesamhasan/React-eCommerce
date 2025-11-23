@@ -45,7 +45,11 @@ function MyNavbar() {
                 Register
               </NavLink>
             </li>
-
+            <li className='nav-item'>
+              <NavLink className='nav-link' to='/contact'>
+                Contact Us
+              </NavLink>
+            </li>
             {/* زرار السلة (Redux) */}
             <li className='nav-item'>
               <NavLink className='nav-link position-relative' to='/cart'>
